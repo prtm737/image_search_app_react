@@ -3,8 +3,8 @@ import React from "react";
 function Navbar() {
   return (
     <div>
-      <div className="navbar bg-neutral text-neutral-content">
-        <a href="#nav" className="btn btn-ghost normal-case text-xl font-bold">
+      <div className="antialiased navbar bg-neutral text-neutral-content p-4">
+        <a href="#nav" className="btn btn-ghost normal-case text-xl font-bold text-center">
           ShowImg
         </a>
       </div>
