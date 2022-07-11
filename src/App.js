@@ -1,24 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import { createContext, useState } from "react";
+import AxiosFetch from "./API/AxiosFetch";
+import Images from "./components/Images";
+import Jumbo from "./components/Jumbo";
+import Navbar from "./components/Navbar";
+import SearchF from "./components/SearchF";
+
+export const ImageContext = createContext();
 
 function App() {
+  const [searchImage, setSearchImage] = useState("");
+  const { response, error, isLoading, fetchData } = AxiosFetch(
+    `/search/photos?page=1&query=office>&client_id=${process.env.REACT_APP_ACCESS_KEY}`
+  );
+
+  console.log(response);
+
+  const value = {
+    response,
+    isLoading,
+    error,
+    fetchData,
+    searchImage,
+    setSearchImage,
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ImageContext.Provider value={value}>
+      <Navbar />
+      <Jumbo>
+        <SearchF />
+      </Jumbo>
+      <Images />
+    </ImageContext.Provider>
   );
 }
 
